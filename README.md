@@ -1,0 +1,4 @@
+Photobooth
+==========
+
+** TODO: Add description **

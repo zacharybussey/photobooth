@@ -1,0 +1,2 @@
+defmodule Photobooth do
+end
