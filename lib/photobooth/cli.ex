@@ -18,7 +18,7 @@ defmodule Photobooth.CLI do
 				-> :help
 			{[snap: true ], _, _}
 				-> :snap
-			{[ snap_set: true], _, _}
+			{[snap_set: true ], _, _}
 				-> :snap_set
 			{ _, [mode], _}
 				-> { mode }
