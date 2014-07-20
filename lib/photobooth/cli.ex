@@ -8,13 +8,18 @@ defmodule Photobooth.CLI do
 
 	def parse_args(argv) do
 		parse = OptionParser.parse(argv, 
-			switches: [ help: :boolean, snap: :boolean],
+			switches: 
+			[ help: :boolean, 
+			snap: :boolean,
+			snap_set: :boolean],
 			aliases: [h: :help ])
 		case parse do
 			{[help: true ], _, _}
 				-> :help
 			{[snap: true ], _, _}
 				-> :snap
+			{[ snap_set: true], _, _}
+				-> :snap_set
 			{ _, [mode], _}
 				-> { mode }
 			_ -> :help
@@ -32,6 +37,15 @@ defmodule Photobooth.CLI do
 	def process(:snap) do
 		Photobooth.Camera.snap_image
 		System.halt(0)
+	end
+
+	def process(:snap_set) do
+		[1..4] |> Enum.map fn _ ->
+			Photobooth.Camera.snap_image
+			:timer.sleep 5000
+		end
+		Photobooth.Camera.download_images
+		Photobooth.Camera.delete_images
 	end
 
 end
