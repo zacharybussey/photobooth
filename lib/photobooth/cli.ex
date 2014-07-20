@@ -11,15 +11,15 @@ defmodule Photobooth.CLI do
 			switches: 
 			[ help: :boolean, 
 			snap: :boolean,
-			snap_set: :boolean],
+			set: :boolean],
 			aliases: [h: :help ])
 		case parse do
 			{[help: true ], _, _}
 				-> :help
 			{[snap: true ], _, _}
 				-> :snap
-			{[snap_set: true ], _, _}
-				-> :snap_set
+			{[set: true ], _, _}
+				-> :set
 			{ _, [mode], _}
 				-> { mode }
 			_ -> :help
@@ -39,7 +39,7 @@ defmodule Photobooth.CLI do
 		System.halt(0)
 	end
 
-	def process(:snap_set) do
+	def process(:set) do
 		[1..4] |> Enum.map fn _ ->
 			Photobooth.Camera.snap_image
 			:timer.sleep 5000
