@@ -40,7 +40,7 @@ defmodule Photobooth.CLI do
 	end
 
 	def process(:set) do
-		[1..4] |> Enum.map fn _ ->
+		Enum.each [1..4], fn _ ->
 			Photobooth.Camera.snap_image
 			:timer.sleep 5000
 		end
