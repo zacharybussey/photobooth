@@ -5,6 +5,7 @@ defmodule Photobooth.Mixfile do
     [app: :photobooth,
      version: "0.0.1",
      elixir: "~> 0.14.2",
+     escript: escript_config,
      deps: deps]
   end
 
@@ -26,5 +27,9 @@ defmodule Photobooth.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     []
+  end
+
+  defp escript_config do
+    [ main_module: Photobooth.CLI ]
   end
 end

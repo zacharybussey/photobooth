@@ -1,15 +1,15 @@
 defmodule Photobooth.CLI do
 
-	def run(argv) do
+	def main(argv) do
 		argv |>
 		parse_args |>
 		process
 	end
 
 	def parse_args(argv) do
-		parse = OptionsParser.parse(argv, switches: [ help: :boolean, 
-													 snap: :boolean], 
-											aliases: [h: :help ])
+		parse = OptionParser.parse(argv, 
+			switches: [ help: :boolean, snap: :boolean],
+			aliases: [h: :help ])
 		case parse do
 			{[help: true ], _, _}
 				-> :help
