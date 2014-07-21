@@ -40,7 +40,7 @@ defmodule Photobooth.CLI do
 	end
 
 	def process(:set) do
-		spawn image_loop 1
+		spawn image_loop(1)
 
 		Photobooth.Camera.download_images
 		Photobooth.Camera.delete_images
