@@ -40,19 +40,6 @@ defmodule Photobooth.CLI do
 	end
 
 	def process(:set) do
-		spawn image_loop(1)
-
-		Photobooth.Camera.download_images
-		Photobooth.Camera.delete_images
-	end
-
-	def image_loop(4) do
-		:ok
-	end
-
-	def image_loop(n) do
-		Photobooth.Camera.snap_image
-		:timer.sleep 5000
-		image_loop n+1
+		Photobooth.Camera.snap_set 4
 	end
 end
