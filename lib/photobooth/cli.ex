@@ -3,6 +3,7 @@ defmodule Photobooth.CLI do
 	def main(argv) do
 		argv |>
 		parse_args |>
+		start_agents |>
 		process
 	end
 
@@ -41,5 +42,10 @@ defmodule Photobooth.CLI do
 
 	def process(:set) do
 		Photobooth.Camera.snap_set 4
+	end
+
+	def start_agents(args) do
+		Photobooth.Supervisor.start_link 4
+		args
 	end
 end

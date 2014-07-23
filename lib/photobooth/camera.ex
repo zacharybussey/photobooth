@@ -30,6 +30,7 @@ defmodule Photobooth.Camera do
 	end
 
 	def terminate(reason, {current_image, images_to_capture, stash_pid}) do
+		IO.inspect reason
 		Photobooth.Stash.save_value stash_pid, {current_image, images_to_capture}
 	end
 
