@@ -8,7 +8,7 @@ defmodule Photobooth.Camera do
 	end
 
 	def snap_set(images_to_capture) do
-		timer = GenServer.send_after(__MODULE__, {:snap_set, 0, images_to_capture}, 1)
+		timer = Process.send_after(__MODULE__, {:snap_set, 0, images_to_capture}, 1)
 		{:ok, timer}
 	end
 

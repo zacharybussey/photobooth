@@ -1,8 +1,8 @@
 defmodule Photobooth.Stash do
 	use GenServer
 
-	def start_link({current_image, images_to_capture}) do
-		GenServer.start_link(__MODULE__, {current_image, images_to_capture })
+	def start_link(start_value) do
+		GenServer.start_link(__MODULE__, start_value)
 	end
 
 	def save_value(pid, value) do
