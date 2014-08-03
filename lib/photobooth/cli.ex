@@ -41,7 +41,7 @@ defmodule Photobooth.CLI do
 	end
 
 	def process(:set) do
-		Photobooth.Camera.snap_set 4
+		Photobooth.Camera.snap_set
 	end
 
 	def start_agents(args) do

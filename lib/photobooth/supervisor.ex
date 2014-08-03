@@ -13,6 +13,7 @@ defmodule Photobooth.Supervisor do
 
 	def start_workers(sup, inital_values) do
 		{:ok, stash } = Supervisor.start_child(sup, worker(Photobooth.Stash, [inital_values]))
-		Supervisor.start_child(sup, supervisor(Photobooth.Camera, [stash]))
+		{:ok, camera } = Supervisor.start_child(sup, supervisor(Photobooth.Camera, [stash]))
+		IO.inspect "Camera started on #{camera}"
 	end
 end
