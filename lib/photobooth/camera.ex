@@ -56,13 +56,13 @@ defmodule Photobooth.Camera do
 		:os.cmd 'gphoto2 --get-all-files'
 	end
 
+	defp process_response([], _state) do
+		IO.puts "Processed OK."
+		:ok
+	end
+
 	defp process_response(response, state) do
-		if length response = 0 do
-			IO.puts "Processed OK."
-			:ok
-		else
-			IO.puts "terminate"
-			terminate(response, state)
-		end
+		IO.puts "terminate"
+		terminate(response, state)
 	end
 end
