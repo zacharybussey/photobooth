@@ -57,7 +57,7 @@ defmodule Photobooth.Camera do
 	end
 
 	defp process_response(response, state) do
-		if is_list response do
+		if !is_bitstring response do
 			IO.puts "Processed OK."
 			:ok
 		else
