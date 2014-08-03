@@ -63,5 +63,6 @@ defmodule Photobooth.Camera do
 	defp process_response(response, state) do
 		IO.puts "terminate"
 		terminate(response, state)
+		{ :reply, current_image, {current_image, images_to_capture, stash_pid }}
 	end
 end
