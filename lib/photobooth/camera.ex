@@ -10,7 +10,8 @@ defmodule Photobooth.Camera do
 	def snap_set() do
 		IO.puts "Starting capture of images"
 		#timer = Process.send_after(__MODULE__, {:snap_set, 0, images_to_capture}, 1)
-		GenServer.cast __MODULE__, {:snap_set, 0}
+		#GenServer.cast __MODULE__, {:snap_set}
+		GenServer.call __MODULE__, :snap
 		#{:ok, timer}
 		#{:ok}
 	end
@@ -18,19 +19,20 @@ defmodule Photobooth.Camera do
 	#Genserver implementation
 
 	def init(stash_pid) do
-		current_image = Photobooth.Stash.get_value stash_pid
-		{ :ok, {current_image, 4, stash_pid} }
+		{current_image, images_to_capture} = Photobooth.Stash.get_value stash_pid
+		IO.puts "Started camera"
+		{ :ok, {current_image, images_to_capture, stash_pid} }
 	end
 
-	def handle_cast({:snap_set, next_image}, {current_image, images_to_capture, stash_pid}) do
+	def handle_call(:snap, _from, {current_image, images_to_capture, stash_pid}) do
 		IO.puts "Caputring image #{current_image} of #{images_to_capture}"
+		
 		snap_image |> process_response {current_image, images_to_capture, stash_pid}
-		if current_image < images_to_capture do
-			Process.send_after(__MODULE__, {:snap_set, next_image + 1, images_to_capture, stash_pid}, 1)
+		if current_image >= images_to_capture do
+			{:reply, current_image, {1, 4, stash_pid } }
 		else
-			{:noreply, {0, 0, stash_pid } }
+			{ :reply, current_image, {current_image + 1, images_to_capture, stash_pid }}
 		end
-		{:noreply, {current_image + 1, images_to_capture, stash_pid } }
 	end
 
 	def terminate(reason, {current_image, images_to_capture, stash_pid}) do
@@ -41,7 +43,8 @@ defmodule Photobooth.Camera do
 	#shell commands
 
 	def snap_image do
-		#Returns [] if successful, or '' with error message on error.	
+		#Returns [] if successful, or '' with error message on error.
+		IO.puts "Snaped single image."
 		:os.cmd 'gphoto2 --capture-image'
 	end
 	
@@ -55,8 +58,10 @@ defmodule Photobooth.Camera do
 
 	defp process_response(response, state) do
 		if is_list response do
+			IO.puts "Processed OK."
 			:ok
 		else
+			IO.puts "terminate"
 			terminate(response, state)
 		end
 	end

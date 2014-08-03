@@ -3,7 +3,6 @@ defmodule Photobooth.CLI do
 	def main(argv) do
 		argv |>
 		parse_args |>
-		start_agents |>
 		process
 	end
 
@@ -41,11 +40,14 @@ defmodule Photobooth.CLI do
 	end
 
 	def process(:set) do
-		Photobooth.Camera.snap_set
+		current_image = Photobooth.Camera.snap_set
+		if current_image < 4 do
+			:timer.sleep 10000
+			process :set
+		end
 	end
 
 	def start_agents(args) do
-		Photobooth.Supervisor.start_link 4
-		args
+		Photobooth.Supervisor.start_link {1, 4}
 	end
 end
