@@ -28,11 +28,6 @@ defmodule Photobooth.Camera do
 		IO.puts "Caputring image #{current_image} of #{images_to_capture}"
 		
 		snap_image |> process_response {current_image, images_to_capture, stash_pid}
-		if current_image >= images_to_capture do
-			{:reply, current_image, {1, 4, stash_pid } }
-		else
-			{ :reply, current_image, {current_image + 1, images_to_capture, stash_pid }}
-		end
 	end
 
 	def terminate(reason, {current_image, images_to_capture, stash_pid}) do
@@ -56,9 +51,13 @@ defmodule Photobooth.Camera do
 		:os.cmd 'gphoto2 --get-all-files'
 	end
 
-	defp process_response([], _state) do
+	defp process_response([], {current_image, images_to_capture, stash_pid}) do
 		IO.puts "Processed OK."
-		:ok
+		if current_image >= images_to_capture do
+			{ :reply, current_image, {1, 4, stash_pid } }
+		else
+			{ :reply, current_image, {current_image + 1, images_to_capture, stash_pid }}
+		end
 	end
 
 	defp process_response(response, state) do
