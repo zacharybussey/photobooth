@@ -44,11 +44,11 @@ defmodule Photobooth.Camera do
 	end
 	
 	def delete_images do
-		:os.cmd 'gphoto2 --folder=\'/store_00010001/DCIM/100D3000\' --delete-all-files'
+		:os.cmd 'gphoto2 --delete-all-files --recurse'
 	end
 
-	def download_images do
-		:os.cmd 'gphoto2 --get-all-files'
+	def download_images(path) do
+		:os.cmd 'gphoto2 --get-all-files --filename #{path}/%f.jpg'
 	end
 
 	defp process_response([], {current_image, images_to_capture, stash_pid}) do
