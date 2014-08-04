@@ -3,7 +3,7 @@ defmodule Photobooth.CLI do
 	def main(argv) do
 		argv |>
 		parse_args |>
-		Main.process
+		Photobooth.Main.process
 	end
 
 	def parse_args(argv) do
