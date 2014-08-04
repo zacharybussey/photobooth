@@ -11,7 +11,8 @@ defmodule Photobooth.CLI do
 			switches: 
 			[ help: :boolean, 
 			snap: :boolean,
-			set: :boolean],
+			set: :boolean,
+			booth: :boolean],
 			aliases: [h: :help ])
 		case parse do
 			{[help: true ], _, _}
@@ -20,6 +21,8 @@ defmodule Photobooth.CLI do
 				-> :snap
 			{[set: true ], _, _}
 				-> :set
+			{[booth: true ], _, _}
+				-> :booth
 			{ _, [mode], _}
 				-> { mode }
 			_ -> :help
