@@ -47,8 +47,9 @@ defmodule Photobooth.Camera do
 		:os.cmd 'gphoto2 --delete-all-files --recurse'
 	end
 
-	def download_images(path) do
+	def download_images(path) do		
 		:os.cmd 'gphoto2 --get-all-files --filename #{path}/%f.jpg'
+		path
 	end
 
 	defp process_response([], {current_image, images_to_capture, stash_pid}) do
