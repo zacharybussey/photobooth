@@ -29,7 +29,9 @@ defmodule Photobooth.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    []
+  [
+    {:elixir_ale, github: "fhunleth/elixir_ale"}
+  ]
   end
 
   defp escript_config do

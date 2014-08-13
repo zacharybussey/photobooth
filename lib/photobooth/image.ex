@@ -1,7 +1,7 @@
 defmodule Photobooth.Image do
 	def montage(image_path) do
 		:os.cmd '''
-			gm montage -geometry 640x480+5+5 -tile 1x4 -bordercolor black -borderWidth 5 /#{image_path}/*.jpg /#{image_path}/booth.jpg
+			gm montage -geometry 640x480+5+5 -tile 1x4 -bordercolor black -borderWidth 5 #{image_path}/*.jpg #{image_path}/booth.jpg
 			'''
 	end
 
