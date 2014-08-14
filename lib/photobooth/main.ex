@@ -1,5 +1,18 @@
 defmodule Photobooth.Main do
-	
+	use GenServer
+		
+	def start_link([]) do
+		GenServer.start_link(__MODULE__, [], name: __MODULE__)
+	end
+
+	def process(:booth) do
+		GenServer.cast __MODULE__, :booth
+	end
+
+	def init([]) do
+		{:ok, []}
+	end
+
 	def process(:help) do
 		IO.puts """
 		usage photobooth --mode
@@ -21,12 +34,13 @@ defmodule Photobooth.Main do
 		end
 	end
 
-	def process(:booth) do
+	def handle_cast(:booth, _from, state) do
 		process :set
 		:timer.sleep 3500 # Wait for the camera to finish saving the last photo.
 		Photobooth.Image.make_folder |> 
 		Photobooth.Camera.download_images |>
 		Photobooth.Image.montage
 		Photobooth.Camera.delete_images
+		{:noreply, :done, state}
 	end
 end
