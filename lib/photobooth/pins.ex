@@ -13,10 +13,10 @@ defmodule Photobooth.Pins do
 		{:ok, {shutter_pid }}
 	end
 
-	def handle_info({:gpio_interrupt, 17, :rising}) do
+	def handle_info({:gpio_interrupt, 17, :rising}, { shutter_pid } ) do
 		IO.puts "handle callback from button press."
 		Photobooth.Main.process :booth
-		{:ok, { shutter_pid}}
+		{:noreply, { shutter_pid}}
 	end
 
 	def terminate(_reason, {shutter_pid}) do
