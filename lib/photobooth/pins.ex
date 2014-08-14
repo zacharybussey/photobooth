@@ -5,7 +5,7 @@ defmodule Photobooth.Pins do
 		GenServer.start_link(__MODULE__, [], name: __MODULE__)
 	end
 
-	def init() do
+	def init([]) do
 		Gpio.start_link 17, :input #Access exception
 		{:ok, shutter_pid} = Gpio.start_link 17, :input
 		IO.puts "Started pin monitor on pid #{shutter_pid}"
