@@ -15,6 +15,7 @@ defmodule Photobooth.Supervisor do
 		{:ok, stash } = Supervisor.start_child(sup, worker(Photobooth.Stash, [inital_values]))
 		{:ok, camera } = Supervisor.start_child(sup, supervisor(Photobooth.Camera, [stash]))
 		{:ok, pins } = Supervisor.start_child(sup, supervisor(Photobooth.Pins, []))
+		{:ok, main } = Supervisor.start_child(sup, Supervisor(Photobooth.Main, []))
 		#IO.inspect "Camera started on #{camera}"
 	end
 end
