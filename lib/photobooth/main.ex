@@ -23,7 +23,7 @@ defmodule Photobooth.Main do
 
 	def process(:booth) do
 		process :set
-		:timer.sleep 2000 # Wait for the camera to finish saving the last photo.
+		:timer.sleep 3500 # Wait for the camera to finish saving the last photo.
 		Photobooth.Image.make_folder |> 
 		Photobooth.Camera.download_images |>
 		Photobooth.Image.montage
