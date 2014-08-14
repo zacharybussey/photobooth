@@ -16,7 +16,7 @@ defmodule Photobooth.Pins do
 		{:ok, { shutter_pid}}
 	end
 
-	def terminate(reason, {shutter_pid}) do
+	def terminate(_reason, {shutter_pid}) do
 		Gpio.release shutter_pid
 	end
 end
