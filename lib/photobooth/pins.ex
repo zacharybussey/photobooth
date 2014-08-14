@@ -8,6 +8,7 @@ defmodule Photobooth.Pins do
 	def init([]) do
 		Gpio.start_link 17, :input #Access exception
 		{:ok, shutter_pid} = Gpio.start_link 17, :input
+		Gpio.set_int shutter_pid, 17
 		IO.puts "Started pin monitor on pin 17"
 		{:ok, {shutter_pid }}
 	end
