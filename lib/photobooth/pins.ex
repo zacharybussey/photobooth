@@ -33,7 +33,7 @@ defmodule Photobooth.Pins do
 		{:noreply, { shutter_pid, busy}}
 	end
 
-	def handle_cast({:finished}, {shutter_pid, busy}) do
+	def handle_cast(:finished, {shutter_pid, busy}) do
 		{:noreply, { shutter_pid, false } }
 	end
 

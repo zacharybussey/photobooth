@@ -6,7 +6,7 @@ defmodule Photobooth.Main do
 	end
 
 	def process(:booth) do
-		GenServer.cast __MODULE__, {:booth, []}
+		GenServer.cast __MODULE__, :booth}
 	end
 
 	def init([]) do
@@ -34,7 +34,7 @@ defmodule Photobooth.Main do
 		end
 	end
 
-	def handle_cast({:booth, _val}, _from, state) do
+	def handle_cast(:booth, state) do
 		process :set
 		:timer.sleep 3500 # Wait for the camera to finish saving the last photo.
 		Photobooth.Image.make_folder |> 
