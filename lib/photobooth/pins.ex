@@ -31,14 +31,14 @@ defmodule Photobooth.Pins do
 		{:ok, {shutter_pid, state }}
 	end
 
-	def handle_info({:gpio_interrupt, 17, :rising}, state ) when state.busy = false, do
+	def handle_info({:gpio_interrupt, 17, :rising}, state ) when state.busy = false do
 		IO.puts "handle rising callback from button press."
 		Photobooth.Main.process :booth
 		state = %{state | busy: true }
 		{:noreply, state}
 	end
 
-	def handle_info({:gpio_interrupt, pin, state}, state ) when state.busy = true, do
+	def handle_info({:gpio_interrupt, pin, state}, state ) when state.busy = true do
 		{:noreply, state }
 	end
 
