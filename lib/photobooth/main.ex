@@ -6,7 +6,7 @@ defmodule Photobooth.Main do
 	end
 
 	def process(:booth) do
-		GenServer.cast __MODULE__, :booth}
+		GenServer.cast __MODULE__, :booth
 	end
 
 	def init([]) do
