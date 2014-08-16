@@ -28,7 +28,7 @@ defmodule Photobooth.Leds do
 
 	defp countoff(pins) do
 		all_on pins
-		Enum.map pins, off_with_pause
+		Enum.map pins, &(off_with_pause &1)
 	end
 
 	defp off_with_pause(pin) do
