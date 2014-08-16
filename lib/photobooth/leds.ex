@@ -20,7 +20,7 @@ defmodule Photobooth.Leds do
 
 	def handle_call(:countdown, _from, pins) do
 		blink pins
-		{:ok, pins}
+		{:reply, :ok, pins}
 	end
 
 	defp blink(pins) do
