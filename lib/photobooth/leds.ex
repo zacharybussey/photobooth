@@ -26,27 +26,27 @@ defmodule Photobooth.Leds do
 		{:reply, :ok, pins}
 	end
 
-	defp countoff(pins) do
+	def countoff(pins) do
 		all_on pins
 		Enum.map pins, &(off_with_pause &1)
 	end
 
-	defp off_with_pause(pin) do
+	def off_with_pause(pin) do
 		Gpio.write pin, 1
 		:timer.sleep 1000
 	end
 
-	defp blink(pins) do
+	def blink(pins) do
 		all_on pins
 		:timer.sleep 500
 		all_off pins
 	end
 
-	defp all_on(pins) do
+	def all_on(pins) do
 		Enum.map pins, &(Gpio.write &1, 0)
 	end
 
-	defp all_off(pins) do
+	def all_off(pins) do
 		Enum.map pins, &(Gpio.write &1, 1)
 	end
 
