@@ -18,7 +18,7 @@ defmodule Photobooth.Leds do
 		{:ok, [led1_pid, led2_pid, led3_pid, led4_pid] }
 	end
 
-	def handle_call(:countdown, pins) do
+	def handle_call(:countdown, _from, pins) do
 		blink pins
 		{:reply, pins}
 	end
