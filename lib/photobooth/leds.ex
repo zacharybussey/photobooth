@@ -14,19 +14,35 @@ defmodule Photobooth.Leds do
 		{:ok, led2_pid} = Gpio.start_link 22, :output
 		{:ok, led3_pid} = Gpio.start_link 23, :output
 		{:ok, led4_pid} = Gpio.start_link 24, :output
-
-		{:ok, [led1_pid, led2_pid, led3_pid, led4_pid] }
+		pins = [led1_pid, led2_pid, led3_pid, led4_pid]
+		all_off pins
+		{:ok, pins }
 	end
 
 	def handle_call(:countdown, _from, pins) do
 		blink pins
+		blink pins
+		countoff pins
 		{:reply, :ok, pins}
 	end
 
+	defp countoff(pins) do
+		all_on
+		Enum.map pins, &(Gpio.write &1, 1; :timer.sleep 1000)
+	end
+
 	defp blink(pins) do
-		Enum.map pins, &(Gpio.write &1, 1)
+		all_on
 		:timer.sleep 500
+		all_off
+	end
+
+	defp all_on do
 		Enum.map pins, &(Gpio.write &1, 0)
+	end
+
+	defp all_off do
+		Enum.map pins, &(Gpio.write &1, 1)
 	end
 
 	def terminate(_reason, pins) do
