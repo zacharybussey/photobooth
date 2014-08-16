@@ -24,12 +24,12 @@ defmodule Photobooth.Leds do
 	end
 
 	defp blink(pins) do
-		pins |> Enum.map fn (p) -> Gpio.write p 1 end
+		Enum.map pins, &(Gpio.write &1 1)
 		:timer.sleep 500
-		pins |> Enum.map fn (p) -> Gpio.write p 0 end
+		Enum.map pins, &(Gpio.write &1 0)
 	end
 
 	def terminate(_reason, pins) do
-		pins |> Enum.map fn (p) -> Gpio.release p end
+		pins |> Enum.map &(Gpio.release &1)
 	end
 end
