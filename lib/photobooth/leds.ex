@@ -38,8 +38,9 @@ defmodule Photobooth.Leds do
 
 	defp blink(pins) do
 		all_on pins
-		:timer.sleep 500
+		:timer.sleep 250
 		all_off pins
+		:timer.sleep 250
 	end
 
 	defp all_on(pins) do
