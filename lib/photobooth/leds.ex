@@ -6,7 +6,7 @@ defmodule Photobooth.Leds do
 	end
 
 	def countdown() do
-		GenServer.call __MODULE__, :countdown
+		GenServer.call __MODULE__, :countdown, 6000
 	end
 
 	def init([]) do
