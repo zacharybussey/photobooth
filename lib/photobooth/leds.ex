@@ -22,31 +22,31 @@ defmodule Photobooth.Leds do
 	def handle_call(:countdown, _from, pins) do
 		blink pins
 		blink pins
-		countoff pins
+		#countoff pins
 		{:reply, :ok, pins}
 	end
 
-	def countoff(pins) do
+	defp countoff(pins) do
 		all_on pins
 		Enum.map pins, &(off_with_pause &1)
 	end
 
-	def off_with_pause(pin) do
+	defp off_with_pause(pin) do
 		Gpio.write pin, 1
 		:timer.sleep 1000
 	end
 
-	def blink(pins) do
+	defp blink(pins) do
 		all_on pins
 		:timer.sleep 500
 		all_off pins
 	end
 
-	def all_on(pins) do
+	defp all_on(pins) do
 		Enum.map pins, &(Gpio.write &1, 0)
 	end
 
-	def all_off(pins) do
+	defp all_off(pins) do
 		Enum.map pins, &(Gpio.write &1, 1)
 	end
 
