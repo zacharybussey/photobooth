@@ -24,10 +24,10 @@ defmodule Photobooth.Pins do
 		state = %State{ shutter_button: shutter_pid }
 		Gpio.set_int shutter_pid, :rising
 		IO.puts "Started pins"
-		{:ok, {shutter_pid, state }}
+		{:ok, state }
 	end
 
-	def handle_info({:gpio_interrupt, 17, :rising}, state } ) do
+	def handle_info({:gpio_interrupt, 17, :rising}, state ) do
 		IO.puts "handle rising callback from button press."
 		if state.busy do
 			Photobooth.Main.process :booth
