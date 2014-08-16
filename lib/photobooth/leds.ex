@@ -24,9 +24,9 @@ defmodule Photobooth.Leds do
 	end
 
 	defp blink(pins) do
-		Enum.map pins, &(Gpio.write &1 1)
+		Enum.map pins, &(Gpio.write &1, 1)
 		:timer.sleep 500
-		Enum.map pins, &(Gpio.write &1 0)
+		Enum.map pins, &(Gpio.write &1, 0)
 	end
 
 	def terminate(_reason, pins) do
