@@ -29,7 +29,7 @@ defmodule Photobooth.Pins do
 
 	def handle_info({:gpio_interrupt, 17, :rising}, state ) do
 		IO.puts "handle rising callback from button press."
-		if state.busy do
+		if state.busy == true do
 			Photobooth.Main.process :booth
 			state = %{state | busy: true }
 		end

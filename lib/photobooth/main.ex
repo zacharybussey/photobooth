@@ -30,7 +30,6 @@ defmodule Photobooth.Main do
 		current_image = Photobooth.Camera.snap_set
 		if current_image < 4 do
 			Photobooth.Leds.countdown
-			:timer.sleep 5000
 			process :set
 		end
 	end
