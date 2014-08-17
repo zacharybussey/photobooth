@@ -15,7 +15,7 @@ defmodule Photobooth.Print do
 
   def handle_cast({:print, filename}, _) do
     #os print command
-    {:noreply, _}
+    {:noreply, [] }
   end
 
 end
