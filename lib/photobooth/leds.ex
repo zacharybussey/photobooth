@@ -20,6 +20,8 @@ defmodule Photobooth.Leds do
 	end
 
 	def handle_call(:countdown, _from, pins) do
+		all_on pins
+		:timer.sleep 500
 		countoff pins
 		blink pins
 		blink pins
@@ -27,7 +29,6 @@ defmodule Photobooth.Leds do
 	end
 
 	defp countoff(pins) do
-		all_on pins
 		Enum.map pins, &(off_with_pause &1)
 	end
 
