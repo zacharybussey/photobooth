@@ -4,7 +4,7 @@ defmodule Photobooth.Mixfile do
   def project do
     [app: :photobooth,
      version: "0.0.1",
-     elixir: "~> 0.14.2",
+     elixir: "~> 0.15.1",
      escript: escript_config,
      deps: deps]
   end
