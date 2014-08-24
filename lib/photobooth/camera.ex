@@ -26,7 +26,7 @@ defmodule Photobooth.Camera do
 
 	def handle_call(:snap, _from, {current_image, images_to_capture, stash_pid}) do
 		IO.puts "Caputring image #{current_image} of #{images_to_capture}"
-		
+
 		snap_image |> process_response {current_image, images_to_capture, stash_pid}
 	end
 
@@ -42,12 +42,12 @@ defmodule Photobooth.Camera do
 		IO.puts "Snaped single image."
 		:os.cmd 'gphoto2 --capture-image'
 	end
-	
+
 	def delete_images do
 		:os.cmd 'gphoto2 --delete-all-files --recurse'
 	end
 
-	def download_images(path) do		
+	def download_images(path) do
 		:os.cmd 'gphoto2 --get-all-files --filename #{path}/%f.jpg'
 		path
 	end

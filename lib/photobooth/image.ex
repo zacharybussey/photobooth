@@ -3,6 +3,7 @@ defmodule Photobooth.Image do
 		:os.cmd '''
 			gm montage -geometry 640x480+5+5 -tile 1x4 -bordercolor black -borderWidth 5 #{image_path}/*.jpg #{image_path}/booth.jpg
 			'''
+		"#{image_path}/booth.jpg"
 	end
 
 	def make_folder do
