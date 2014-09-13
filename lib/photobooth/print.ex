@@ -14,7 +14,8 @@ defmodule Photobooth.Print do
   end
 
   def handle_cast({:print, filename}, _) do
-    :os.cmd 'lp #{filename}'
+    #:os.cmd 'lp #{filename}'
+    :os.cmd 'mutt -s "Ben and Rebecca Wedding 9/13/14" -a #{filename} -- trivett@print.epsonconnect.com < /home/pi/message.txt'
     {:noreply, [] }
   end
 
