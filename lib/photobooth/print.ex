@@ -10,7 +10,7 @@ defmodule Photobooth.Print do
   end
 
   def print(filename) do
-		GenServer.call __MODULE__, {:print, filename}
+		GenServer.cast __MODULE__, {:print, filename}
   end
 
   def handle_cast({:print, filename}, _) do
