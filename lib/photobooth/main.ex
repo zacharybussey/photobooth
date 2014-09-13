@@ -29,6 +29,7 @@ defmodule Photobooth.Main do
 	def process(:set) do
 		Photobooth.Leds.countdown
 		Photobooth.Camera.snap_set
+		Photobooth.Leds.countdown
 		process_set
 	end
 
