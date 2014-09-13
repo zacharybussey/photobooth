@@ -10,7 +10,7 @@ defmodule Photobooth.Print do
   end
 
   def print(filename) do
-    :os.cmd 'mutt -s "Ben and Rebecca Wedding 9/13/14" -a #{filename} -- zacharybussey@gmail.com < /home/pi/message.txt'
+    :os.cmd 'mutt -s "Ben and Rebecca Wedding 9/13/14" -a #{filename} -- trivett@print.epsonconnect.com < /home/pi/message.txt'
     #IO.puts "printing"
 		#GenServer.cast __MODULE__, {:print, filename}
   end
