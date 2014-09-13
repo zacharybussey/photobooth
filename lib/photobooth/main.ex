@@ -27,9 +27,16 @@ defmodule Photobooth.Main do
 	end
 
 	def process(:set) do
+		Photobooth.Leds.countdown
+		Photobooth.Camera.snap_set
+		process_set
+	end
+
+	def process_set() do
+		current_image = Photobooth.Camera.snap_set
+
 		if current_image < 4 do
 			Photobooth.Leds.countdown
-			current_image = Photobooth.Camera.snap_set
 			process :set
 		end
 	end
