@@ -37,7 +37,7 @@ defmodule Photobooth.Main do
 
 		if current_image < 4 do
 			Photobooth.Leds.countdown
-			process :set
+			process_set
 		end
 	end
 
