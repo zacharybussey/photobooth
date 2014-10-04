@@ -1,7 +1,10 @@
 Photobooth
 ==========
 
-** TODO: Add description **
+This is a photobooth application, written in Elixir.
+The intent is to have a set and forget photobooth running an event,
+taking high quality pictures from a DSLR camera, and combining them into a photostrip which could be printed out.
+A more in depth explanation can be found on my blog: zachdevelop.com
 
 ##How to get this to work
 
@@ -40,22 +43,18 @@ sudo rm /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
 
 ###GPIO pins
 
-Setup an add yourself to a group, so that the pins can be
-accessed without permissions errors.
-```shell
-sudo groupadd gpio
-sudo usermod -aG gpio <myusername>
-su <myusername>
-sudo chgrp gpio /sys/class/gpio/export
-sudo chgrp gpio /sys/class/gpio/unexport
-sudo chmod 775 /sys/class/gpio/export
-sudo chmod 775 /sys/class/gpio/unexport
-```
+To avoid permission access issues when making calls from the program to the GPIO pins,
+install the wiring pi project:
+https://projects.drogon.net/raspberry-pi/wiringpi/download-and-install/
+
+OS commands are sent to setup the pins for import and export as needed, since
+the Elixir library that talks the pins tended to run into access exceptions.
 
 ###Hardware
 
-The code expects there to be two buttons and four leds.  You may
-need to adjust the pins, depending on your setup.
+The code expects there to be one button and four leds.  You may
+need to adjust the pins, depending on your setup.  The shutter control button
+is connected to pin 17, and the leds are connected to pins 21 to 24.
 
 ###Running the program
 

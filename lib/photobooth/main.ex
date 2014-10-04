@@ -48,7 +48,6 @@ defmodule Photobooth.Main do
 		Photobooth.Image.make_folder |>
 		Photobooth.Camera.download_images |>
 		Photobooth.Image.montage |>
-		Photobooth.Print.print
 		Photobooth.Camera.delete_images
 		Photobooth.Pins.finished_processing
 		{:noreply, :done, state}
