@@ -47,7 +47,7 @@ defmodule Photobooth.Main do
 		:timer.sleep 3500 # Wait for the camera to finish saving the last photo.
 		Photobooth.Image.make_folder |>
 		Photobooth.Camera.download_images |>
-		Photobooth.Image.montage |>
+		Photobooth.Image.montage
 		Photobooth.Camera.delete_images
 		Photobooth.Pins.finished_processing
 		{:noreply, :done, state}
