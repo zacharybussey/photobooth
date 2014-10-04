@@ -10,10 +10,10 @@ defmodule Photobooth.Leds do
 	end
 
 	def init([]) do
-		{:ok, led1_pid} = :gpio.start_link 21, :output
-		{:ok, led2_pid} = :gpio.start_link 22, :output
-		{:ok, led3_pid} = :gpio.start_link 23, :output
-		{:ok, led4_pid} = :gpio.start_link 24, :output
+		{:ok, led1_pid} = Gpio.start_link 21, :output
+		{:ok, led2_pid} = Gpio.start_link 22, :output
+		{:ok, led3_pid} = Gpio.start_link 23, :output
+		{:ok, led4_pid} = Gpio.start_link 24, :output
 		pins = [led1_pid, led2_pid, led3_pid, led4_pid]
 		all_off pins
 		{:ok, pins }
@@ -33,7 +33,7 @@ defmodule Photobooth.Leds do
 	end
 
 	defp off_with_pause(pin) do
-		:gpio.write pin, 1
+		Gpio.write pin, 1
 		:timer.sleep 1000
 	end
 
@@ -49,10 +49,10 @@ defmodule Photobooth.Leds do
 	end
 
 	defp all_off(pins) do
-		Enum.map pins, &(:gpio.write &1, 1)
+		Enum.map pins, &(Gpio.write &1, 1)
 	end
 
 	def terminate(_reason, pins) do
-		pins |> Enum.map &(:gpio.release &1)
+		pins |> Enum.map &(Gpio.release &1)
 	end
 end

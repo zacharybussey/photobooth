@@ -30,7 +30,7 @@ defmodule Photobooth.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
   [
-    {:erlang_ale, github: "esl/erlang_ale"}
+    {:elixir_ale, github: "fhunleth/elixir_ale"}
   ]
   end
 
