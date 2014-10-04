@@ -15,7 +15,8 @@ defmodule Photobooth.Mixfile do
   def application do
     [
       applications: [:gpio],
-      mod: {Photobooth, []}
+      mod: {Photobooth, []},
+      env: {:gpio, [{:options, [{:chipset,:bcm2835}]}]}
     ]
   end
 
