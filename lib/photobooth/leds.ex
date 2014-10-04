@@ -10,6 +10,9 @@ defmodule Photobooth.Leds do
 	end
 
 	def init([]) do
+
+		[21..24] |> Enum.map &(init_pins &1)
+
 		{:ok, led1_pid} = Gpio.start_link 21, :output
 		{:ok, led2_pid} = Gpio.start_link 22, :output
 		{:ok, led3_pid} = Gpio.start_link 23, :output
@@ -17,6 +20,11 @@ defmodule Photobooth.Leds do
 		pins = [led1_pid, led2_pid, led3_pid, led4_pid]
 		all_off pins
 		{:ok, pins }
+	end
+
+	defp init_pins(pin) do
+		:os.cmd 'gpio write %{pin} 0'
+		:os.cmd 'gpio export %{pin} out'
 	end
 
 	def handle_call(:countdown, _from, pins) do

@@ -18,7 +18,7 @@ defmodule Photobooth.Pins do
 	end
 
 	def init([]) do
-		Gpio.start_link 17, :input #Access exception
+		:os.cmd 'gpio export 17 in'
 		{:ok, shutter_pid} = Gpio.start_link 17, :input
 
 		state = %State{ shutter_button: shutter_pid }
