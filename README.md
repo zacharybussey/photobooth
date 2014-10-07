@@ -4,7 +4,7 @@ Photobooth
 This is a photobooth application, written in Elixir.
 The intent is to have a set and forget photobooth running an event,
 taking high quality pictures from a DSLR camera, and combining them into a photostrip which could be printed out.
-A more in depth explanation can be found on my blog: zachdevelop.com
+A more in depth explanation can be found [on my blog.](http://www.zachdevelop.com/making-a-photobooth-application-that-runs-on-elixir/)
 
 ##How to get this to work
 
